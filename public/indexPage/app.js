@@ -47,8 +47,10 @@ Vue.createApp({
         .then((response) => response.json())
         .then((data) => {
           this.user.myListings = data;
+          console.log(this.user.myListings);
         });
     },
+
     // Sign In / Up Modal
     toggleNavModal: function () {
       this.navUser.name = "";
@@ -121,14 +123,16 @@ Vue.createApp({
         method: "DELETE",
       };
 
-      fetch(URL + "properties/" + listingId, requestOptions).then((response) => {
-        if (response.status === 204) {
-          console.log("Listing deleted");
-          this.user.myListings.splice(index, 1);
-        } else {
-          alert("Not able to delete listing");
+      fetch(URL + "properties/" + listingId, requestOptions).then(
+        (response) => {
+          if (response.status === 204) {
+            console.log("Listing deleted");
+            this.user.myListings.splice(index, 1);
+          } else {
+            alert("Not able to delete listing");
+          }
         }
-      });
+      );
     },
 
     // Settings Modal
@@ -324,6 +328,7 @@ Vue.createApp({
         .then((response) => response.json())
         .then((data) => {
           this.user = data;
+          console.log(this.user);
           this.getMyListings();
         });
     },
